@@ -5,7 +5,7 @@ urlpatterns = [
     # path('movies/', views.movie_list),
     path('movies/', views.MovieList.as_view()),
     # path('movies/<int:id>/', views.movie_detail),
-    path('movies/<int:id>/', views.MovieDetail.as_view()),
+    path('movies/<int:pk>/', views.MovieDetail.as_view()),
     # path('genres/', views.genre_list),
     path('genres/', views.GenreList.as_view()),
     # path('genres/<int:id>/', views.genre_detail),
