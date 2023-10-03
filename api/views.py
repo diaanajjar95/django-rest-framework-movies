@@ -83,6 +83,7 @@ class GenreDetail(APIView):
         return Response(serialier.data)
     
     def patch(self,request,id):
+        genre = get_object_or_404(Genre,pk=id)
         serialier = GenreSerializer(genre,data=request.data)
         serialier.is_valid(raise_exception=True)
         serialier.save()
