@@ -89,3 +89,11 @@ class Movie(models.Model):
         return self.title
 
 
+
+class Review(models.Model):
+    movie = models.ForeignKey(Movie,on_delete=models.CASCADE,related_name='reviews')
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+    

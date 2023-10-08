@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Genre, Movie,Director,Actor,Writer
+from .models import Genre, Movie,Director,Actor, Review,Writer
 
 
 
@@ -54,3 +54,18 @@ class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ['id','title','description','genre','director','actors','writers']
+
+
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id','date','name','description']
+
+    
+    def create(self, validated_data):
+        movie_id = self.context['movie_id']
+        return Review.objects.create(movie_id=movie_id,**validated_data)
+
+

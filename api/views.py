@@ -1,5 +1,5 @@
-from .models import Movie,Genre,Actor,Director,Writer
-from .serializers import ActorSerializer, DirectorSerializer, MovieSerializer,GenreSerializer,CreateMovieSerializer, WriterSerializer
+from .models import Movie,Genre,Actor,Director, Review,Writer
+from .serializers import ActorSerializer, DirectorSerializer, MovieSerializer,GenreSerializer,CreateMovieSerializer, ReviewSerializer, WriterSerializer
 from rest_framework.generics import ListCreateAPIView,RetrieveAPIView,RetrieveUpdateAPIView,ListAPIView
 from rest_framework.viewsets import ModelViewSet
 
@@ -32,3 +32,12 @@ class WriterViewSet(ModelViewSet):
     serializer_class = WriterSerializer
     lookup_field = 'id'
     
+
+class ReviewViewSet(ModelViewSet):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        return Review.objects.filter(movie_id=self.kwargs['movie_pk'])
+
+    def get_serializer_context(self):
+        return {'movie_id':self.kwargs['movie_pk']}
